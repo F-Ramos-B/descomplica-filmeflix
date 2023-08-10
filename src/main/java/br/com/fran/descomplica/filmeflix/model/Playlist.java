@@ -8,6 +8,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -47,10 +48,10 @@ public class Playlist extends BaseEntity {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.playlist")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.playlist", fetch = FetchType.LAZY)
     private List<PlaylistFilme> playlists = new ArrayList<>();
 
-    @OneToMany(mappedBy = "playlist")
+    @OneToMany(mappedBy = "playlist", fetch = FetchType.LAZY)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 }

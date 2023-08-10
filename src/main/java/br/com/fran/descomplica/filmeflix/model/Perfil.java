@@ -27,7 +27,7 @@ public class Perfil extends BaseEntity {
     @Size(max = 20)
     private String descricao;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfil", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilUsuarioPK.perfil", fetch = FetchType.LAZY)
     private List<PerfilUsuario> perfisUsuarios = new ArrayList<>();
 
 }

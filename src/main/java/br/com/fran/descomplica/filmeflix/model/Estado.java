@@ -29,7 +29,7 @@ public class Estado extends BaseEntity {
     @Size(max = 2)
     private String uf;
 
-    @OneToMany(mappedBy = "idUf", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
     private List<Endereco> enderecos = new ArrayList<>();
 
 }

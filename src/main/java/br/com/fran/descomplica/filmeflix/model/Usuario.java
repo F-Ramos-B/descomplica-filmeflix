@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -60,13 +61,13 @@ public class Usuario extends BaseEntity {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "idUsuario")
-    private List<Contato> contatoList;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Contato> contatos = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<PerfilUsuario> perfilUsuarioList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilUsuarioPK.usuario", fetch = FetchType.LAZY)
+    private List<PerfilUsuario> perfisUsuarios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "idCliente")
-    private List<Avaliacao> avaliacaoList = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 }

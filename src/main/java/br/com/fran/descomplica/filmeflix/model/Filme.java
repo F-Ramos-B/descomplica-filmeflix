@@ -74,10 +74,10 @@ public class Filme extends BaseEntity {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Ator> atores = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "filme", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.filme", fetch = FetchType.LAZY)
     private List<PlaylistFilme> playlists = new ArrayList<>();
 
-    @OneToMany(mappedBy = "idFilme", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "filme", fetch = FetchType.LAZY)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
     @JoinColumn(name = "id_plataforma", referencedColumnName = "id")

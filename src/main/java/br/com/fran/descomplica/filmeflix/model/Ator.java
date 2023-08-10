@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -49,7 +50,7 @@ public class Ator extends BaseEntity {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "atores")
+    @ManyToMany(mappedBy = "atores", fetch = FetchType.LAZY)
     private List<Filme> filmes = new ArrayList<>();
 
 }
