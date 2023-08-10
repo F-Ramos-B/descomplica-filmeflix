@@ -13,14 +13,25 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/config/**").permitAll()
-                .antMatchers("/config/**").permitAll()
+                .antMatchers(this.allowed())
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
         return http.build();
+    }
+
+    private String[] allowed() {
+        return new String[]{
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/webjars/swagger-ui/**",
+            "/auth/**",
+            "/config/",
+            "/config/**"
+        };
     }
 
 }
