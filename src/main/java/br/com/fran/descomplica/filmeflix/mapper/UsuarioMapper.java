@@ -2,25 +2,18 @@ package br.com.fran.descomplica.filmeflix.mapper;
 
 import br.com.fran.descomplica.filmeflix.dto.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
+import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
 import br.com.fran.descomplica.filmeflix.model.Usuario;
 import java.util.function.UnaryOperator;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public abstract class UsuarioMapper {
+@Mapper
+public interface UsuarioMapper extends BaseMapper<Usuario, UsuarioDTO> {
 
-    public static UsuarioDTO toDTO(Usuario usuario) {
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
+    UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
 
-        usuarioDTO.setId(usuario.getId());
-        usuarioDTO.setApelido(usuario.getApelido());
-        usuarioDTO.setDataNascimento(usuario.getDataNascimento());
-        usuarioDTO.setEmail(usuario.getEmail());
-        usuarioDTO.setGenero(usuario.getGenero());
-        usuarioDTO.setNome(usuario.getNome());
-
-        return usuarioDTO;
-    }
-
-    public static Usuario toNovoUsuario(RegistroDTO registroDTO, UnaryOperator<String> passwordEncoderOperation) {
+    default Usuario toNovoUsuario(RegistroDTO registroDTO, UnaryOperator<String> passwordEncoderOperation) {
         Usuario usuario = new Usuario();
 
         usuario.setApelido(registroDTO.getApelido());

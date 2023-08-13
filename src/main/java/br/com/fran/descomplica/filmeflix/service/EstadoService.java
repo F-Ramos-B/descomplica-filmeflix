@@ -18,7 +18,7 @@ public class EstadoService {
     }
 
     public List<EstadoDTO> listarEstados() {
-        return EstadoMapper.toDTO(estadoRepository.findAll());
+        return EstadoMapper.INSTANCE.toDTOList(estadoRepository.findAll());
     }
 
 }

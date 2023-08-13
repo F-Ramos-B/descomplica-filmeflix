@@ -48,7 +48,7 @@ public class AuthAPI {
         Authentication authentication = authenticationManager.authenticate(userAuth);
         Usuario usuario = (Usuario) authentication.getPrincipal();
         String token = tokenService.gerarToken(usuario);
-        return ResponseEntity.ok(new AuthDTO(token, UsuarioMapper.toDTO(usuario)));
+        return ResponseEntity.ok(new AuthDTO(token, UsuarioMapper.INSTANCE.toDTO(usuario)));
     }
 
 }
