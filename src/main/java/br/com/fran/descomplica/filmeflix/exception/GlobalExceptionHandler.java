@@ -13,20 +13,30 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    
+
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErroDTO> tratarException(Exception ex) {
         return gerarErroDTO(ex, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
+
     @ExceptionHandler({AccessDeniedException.class, BadCredentialsException.class})
     protected ResponseEntity<ErroDTO> tratarAuthException(Exception ex) {
         return gerarErroDTO(ex, HttpStatus.UNAUTHORIZED);
     }
-    
-    private ResponseEntity<ErroDTO> gerarErroDTO(Exception ex, final HttpStatus error) {
-        log.error("Erro", ex);
-        return new ResponseEntity<>(new ErroDTO(ex.getLocalizedMessage(), error.value(), error.getReasonPhrase()), error);
+
+    private ResponseEntity<ErroDTO> gerarErroDTO(Exception ex, final HttpStatus httpError) {
+        String detalhesErro = ex.toString();
+        log.error(detalhesErro, ex);
+
+        return new ResponseEntity<>(
+                ErroDTO.builder()
+                        .erro(ex.getLocalizedMessage())
+                        .statusCode(httpError.value())
+                        .descricao(httpError.getReasonPhrase())
+                        .detalhes(detalhesErro)
+                        .build(),
+                httpError
+        );
     }
-    
+
 }
