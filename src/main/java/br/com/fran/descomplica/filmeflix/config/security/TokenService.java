@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,10 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class TokenService {
 
-    @Value("${filmeflix.jwt_secret:8700cf474918d556bf61afb6a3e3855a1e333b14033d07720d7036e14b8bf358}")
+    @Value("${filmeflix.jwt.issuer:filmeflix}")
+    private String JWT_ISSUER;
+
+    @Value("${filmeflix.jwt.secret:8700cf474918d556bf61afb6a3e3855a1e333b14033d07720d7036e14b8bf358}")
     private String JWT_SECRET;
 
     public String gerarToken(Usuario usuario) {
@@ -25,7 +29,7 @@ public class TokenService {
             Algorithm algorithm = getCipher();
 
             return JWT.create()
-                    .withIssuer("filmeflix")
+                    .withIssuer(JWT_ISSUER)
                     .withSubject(usuario.getEmail())
                     .withExpiresAt(gerarDataExpiracao())
                     .sign(algorithm);
@@ -42,13 +46,13 @@ public class TokenService {
             Algorithm algorithm = getCipher();
 
             return JWT.require(algorithm)
-                    .withIssuer("filmeflix")
+                    .withIssuer(JWT_ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
 
         } catch (JWTVerificationException jwtve) {
-            return "";
+            return StringUtils.EMPTY;
         }
 
     }

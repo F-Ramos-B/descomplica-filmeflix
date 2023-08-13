@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UsuarioDTO {
 
+    private Long id;
     private String nome;
     private String apelido;
     private String email;

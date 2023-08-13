@@ -6,16 +6,15 @@ import br.com.fran.descomplica.filmeflix.model.Usuario;
 import br.com.fran.descomplica.filmeflix.repository.PerfilRepository;
 import br.com.fran.descomplica.filmeflix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import br.com.fran.descomplica.filmeflix.util.ResultUtils;
 
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService, ResultUtils {
 
     private final UsuarioRepository usuarioRepository;
     private final PerfilRepository perfilRepository;
@@ -30,7 +29,7 @@ public class UsuarioService implements UserDetailsService {
 
     public RegistroDTO registrar(RegistroDTO registroDTO) {
 
-        Usuario usuario = UsuarioMapper.toNovoUsuario(registroDTO, passwordEncoder);
+        Usuario usuario = UsuarioMapper.toNovoUsuario(registroDTO, passwordEncoder::encode);
 
         usuario.setPerfil(perfilRepository.getById(1L));
 
@@ -41,7 +40,7 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findByEmail(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return requireNotEmpty(usuarioRepository.findByEmail(username));
     }
 
 }

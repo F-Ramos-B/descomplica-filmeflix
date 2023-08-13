@@ -38,7 +38,7 @@ public class AuthAPI {
 
     @PostMapping("/registrar")
     public ResponseEntity<RegistroDTO> registrar(@RequestBody @Valid RegistroDTO registroDTO) {
-        return new ResponseEntity<>(usuarioService.registrar(registroDTO), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.registrar(registroDTO));
     }
 
     @PostMapping("/login")
@@ -50,4 +50,5 @@ public class AuthAPI {
         String token = tokenService.gerarToken(usuario);
         return ResponseEntity.ok(new AuthDTO(token, UsuarioMapper.toDTO(usuario)));
     }
+
 }
