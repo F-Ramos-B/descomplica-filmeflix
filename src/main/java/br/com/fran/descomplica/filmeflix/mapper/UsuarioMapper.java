@@ -14,13 +14,8 @@ public interface UsuarioMapper extends BaseMapper<Usuario, UsuarioDTO> {
     UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
 
     default Usuario toNovoUsuario(RegistroDTO registroDTO, UnaryOperator<String> passwordEncoderOperation) {
-        Usuario usuario = new Usuario();
+        Usuario usuario = this.toEntity(registroDTO);
 
-        usuario.setApelido(registroDTO.getApelido());
-        usuario.setDataNascimento(registroDTO.getDataNascimento());
-        usuario.setEmail(registroDTO.getEmail());
-        usuario.setGenero(registroDTO.getGenero());
-        usuario.setNome(registroDTO.getNome());
         usuario.setSenha(passwordEncoderOperation.apply(registroDTO.getSenha()));
 
         return usuario;
