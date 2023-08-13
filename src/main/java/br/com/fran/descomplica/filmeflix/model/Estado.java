@@ -23,11 +23,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Estado extends BaseEntity {
 
-    @Size(max = 50)
-    private String nome;
-
     @Size(max = 2)
     private String uf;
+
+    @Size(max = 50)
+    private String nome;
 
     @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
     private List<Endereco> enderecos = new ArrayList<>();

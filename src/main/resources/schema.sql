@@ -3,13 +3,6 @@ CREATE TABLE `perfis` (
   `descricao` varchar(20)
 );
 
-CREATE TABLE `perfis_usuarios` (
-  `id_usuario` integer,
-  `id_perfil` integer,
-  `created_at` timestamp DEFAULT (now()),
-  PRIMARY KEY (`id_usuario`, `id_perfil`)
-);
-
 CREATE TABLE `usuarios` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(100),
@@ -19,12 +12,14 @@ CREATE TABLE `usuarios` (
   `genero` varchar(50),
   `link_avatar` varchar(250),
   `data_nascimento` date,
+  `id_perfil` integer,
   `created_at` timestamp DEFAULT (now()),
   `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `enderecos` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id_usuario` integer,
   `cep` varchar(8),
   `logradouro` varchar(50),
   `complemento` varchar(50),
@@ -37,8 +32,8 @@ CREATE TABLE `enderecos` (
 
 CREATE TABLE `estados` (
   `id` integer PRIMARY KEY,
-  `nome` varchar(50),
-  `uf` varchar(2)
+  `uf` varchar(2),
+  `nome` varchar(50)
 );
 
 CREATE TABLE `contatos` (
@@ -128,6 +123,8 @@ CREATE TABLE `playlists_filmes` (
 
 ALTER TABLE `contatos` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
+ALTER TABLE `enderecos` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
 ALTER TABLE `filmes_atores` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`);
 
 ALTER TABLE `filmes_atores` ADD FOREIGN KEY (`id_ator`) REFERENCES `atores` (`id`);
@@ -136,9 +133,7 @@ ALTER TABLE `avaliacoes` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`)
 
 ALTER TABLE `avaliacoes` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
-ALTER TABLE `perfis_usuarios` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
-
-ALTER TABLE `perfis_usuarios` ADD FOREIGN KEY (`id_perfil`) REFERENCES `perfis` (`id`);
+ALTER TABLE `usuarios` ADD FOREIGN KEY (`id_perfil`) REFERENCES `perfis` (`id`);
 
 ALTER TABLE `enderecos` ADD FOREIGN KEY (`id_uf`) REFERENCES `estados` (`id`);
 
