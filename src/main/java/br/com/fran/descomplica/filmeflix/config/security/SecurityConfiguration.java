@@ -12,15 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    private final FilterChainExceptionHandler filterChainExceptionHandler;
     private final TokenSecurityFilter tokenSecurityFilter;
 
     @Autowired
-    public SecurityConfiguration(TokenSecurityFilter tokenSecurityFilter) {
+    public SecurityConfiguration(FilterChainExceptionHandler filterChainExceptionHandler, TokenSecurityFilter tokenSecurityFilter) {
+        this.filterChainExceptionHandler = filterChainExceptionHandler;
         this.tokenSecurityFilter = tokenSecurityFilter;
     }
 
@@ -39,6 +42,7 @@ public class SecurityConfiguration {
                                 .antMatchers(this.allowed()).permitAll()
                                 .anyRequest().authenticated()
                 )
+                .addFilterBefore(filterChainExceptionHandler, LogoutFilter.class)
                 .addFilterBefore(tokenSecurityFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic();
         return http.build();

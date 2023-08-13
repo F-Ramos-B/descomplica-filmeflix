@@ -8,7 +8,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,7 @@ public class TokenService {
                     .getSubject();
 
         } catch (JWTVerificationException jwtve) {
-            return StringUtils.EMPTY;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token invalido", jwtve);
         }
 
     }
