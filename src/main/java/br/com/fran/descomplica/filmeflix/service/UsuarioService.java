@@ -2,9 +2,9 @@ package br.com.fran.descomplica.filmeflix.service;
 
 import br.com.fran.descomplica.filmeflix.dto.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
+import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import br.com.fran.descomplica.filmeflix.mapper.UsuarioMapper;
 import br.com.fran.descomplica.filmeflix.model.Usuario;
-import br.com.fran.descomplica.filmeflix.repository.PerfilRepository;
 import br.com.fran.descomplica.filmeflix.repository.UsuarioRepository;
 import br.com.fran.descomplica.filmeflix.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +18,19 @@ import org.springframework.stereotype.Service;
 public class UsuarioService implements UserDetailsService, ResultUtils {
 
     private final UsuarioRepository usuarioRepository;
-    private final PerfilRepository perfilRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository, PerfilRepository perfilRepository, PasswordEncoder passwordEncoder) {
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
-        this.perfilRepository = perfilRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     public UsuarioDTO registrar(RegistroDTO registroDTO) {
         Usuario usuario = UsuarioMapper.INSTANCE.toNovoUsuario(registroDTO, passwordEncoder::encode);
 
-        usuario.setPerfil(requireNotEmpty(perfilRepository.findById(2L)));
+        usuario.setPerfil(EnumPerfil.USUARIO);
+
         return UsuarioMapper.INSTANCE.toDTO(usuarioRepository.save(usuario));
     }
 

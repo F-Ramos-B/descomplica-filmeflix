@@ -1,5 +1,6 @@
 package br.com.fran.descomplica.filmeflix.dto;
 
+import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class UsuarioDTO {
     private String apelido;
     private String email;
     private String genero;
+    private EnumPerfil perfil;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
