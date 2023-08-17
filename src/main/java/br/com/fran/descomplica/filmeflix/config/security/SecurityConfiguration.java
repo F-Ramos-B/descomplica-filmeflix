@@ -1,5 +1,6 @@
 package br.com.fran.descomplica.filmeflix.config.security;
 
+import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +41,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorize -> authorize
                                 .antMatchers(this.allowed()).permitAll()
+                                .antMatchers("/admins/**").hasAuthority(EnumPerfil.ADMIN.toString())
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(filterChainExceptionHandler, LogoutFilter.class)

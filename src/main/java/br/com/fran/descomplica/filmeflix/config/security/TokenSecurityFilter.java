@@ -34,9 +34,9 @@ public class TokenSecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = this.recoverToken(request);
-        log.info("Token informado: {}", token);
-
+        
         if (StringUtils.isNotBlank(token)) {
+            log.info("Token informado: {}", token);
             String emailUsuario = tokenService.validarToken(token);
             log.info("Principal obtido de token: {}", emailUsuario);
 

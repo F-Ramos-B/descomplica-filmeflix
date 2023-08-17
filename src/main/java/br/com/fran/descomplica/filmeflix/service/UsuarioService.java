@@ -1,5 +1,6 @@
 package br.com.fran.descomplica.filmeflix.service;
 
+import br.com.fran.descomplica.filmeflix.dto.MensagemDTO;
 import br.com.fran.descomplica.filmeflix.dto.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
 import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
@@ -26,12 +27,14 @@ public class UsuarioService implements UserDetailsService, ResultUtils {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UsuarioDTO registrar(RegistroDTO registroDTO) {
+    public MensagemDTO<UsuarioDTO> registrar(RegistroDTO registroDTO, EnumPerfil perfil) {
         Usuario usuario = UsuarioMapper.INSTANCE.toNovoUsuario(registroDTO, passwordEncoder::encode);
 
-        usuario.setPerfil(EnumPerfil.USUARIO);
+        usuario.setPerfil(perfil);
 
-        return UsuarioMapper.INSTANCE.toDTO(usuarioRepository.save(usuario));
+        UsuarioDTO usuarioDTO = UsuarioMapper.INSTANCE.toDTO(usuarioRepository.save(usuario));
+
+        return new MensagemDTO<>("Usuário criado com sucesso!", usuarioDTO);
     }
 
     @Override

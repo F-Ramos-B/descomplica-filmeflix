@@ -3,8 +3,10 @@ package br.com.fran.descomplica.filmeflix.api;
 import br.com.fran.descomplica.filmeflix.config.security.TokenService;
 import br.com.fran.descomplica.filmeflix.dto.AuthDTO;
 import br.com.fran.descomplica.filmeflix.dto.LoginDTO;
+import br.com.fran.descomplica.filmeflix.dto.MensagemDTO;
 import br.com.fran.descomplica.filmeflix.dto.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
+import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import br.com.fran.descomplica.filmeflix.mapper.UsuarioMapper;
 import br.com.fran.descomplica.filmeflix.model.Usuario;
 import br.com.fran.descomplica.filmeflix.service.UsuarioService;
@@ -38,8 +40,8 @@ public class AuthAPI {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioDTO> registrar(@RequestBody @Valid RegistroDTO registroDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.registrar(registroDTO));
+    public ResponseEntity<MensagemDTO<UsuarioDTO>> registrar(@RequestBody @Valid RegistroDTO registroDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.registrar(registroDTO, EnumPerfil.USUARIO));
     }
 
     @PostMapping("/login")
