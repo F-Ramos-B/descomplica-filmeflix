@@ -28,17 +28,16 @@ public enum EnumPerfil {
         }
     }
 
-    @Override
     @JsonValue
-    public String toString() {
-        return this.name();
+    public int getCodigo() {
+        return ordinal();
     }
 
+    @JsonCreator
     public static EnumPerfil fromCodigo(Integer codigo) {
         return codigo != null ? mapByCodigo.get(codigo) : null;
     }
 
-    @JsonCreator
     public static EnumPerfil fromDescricao(String descricao) {
         return StringUtils.isNotBlank(descricao) ? mapByDescricao.get(descricao) : null;
     }
