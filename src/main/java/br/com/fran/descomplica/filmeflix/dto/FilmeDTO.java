@@ -1,5 +1,7 @@
 package br.com.fran.descomplica.filmeflix.dto;
 
+import br.com.fran.descomplica.filmeflix.dto.base.EntidadeDominioDTO;
+import br.com.fran.descomplica.filmeflix.dto.base.BaseFilmeDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,15 +15,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmeDTO {
+public class FilmeDTO extends BaseFilmeDTO {
 
-    private Long id;
-    private String titulo;
-    private String descricao;
-    private Integer numeroVisualizaoes;
-    private String linkImagem;
-    private String linkFilme;
-    private Integer classificacaoIndicativa;
     private List<EntidadeDominioDTO> generos = new ArrayList<>();
     private PlataformaDTO plataforma;
 

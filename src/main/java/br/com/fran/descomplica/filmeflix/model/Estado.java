@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Estado extends BaseEntity {
+public class Estado extends BaseEntity<Long> {
 
     @Size(max = 2)
     private String uf;

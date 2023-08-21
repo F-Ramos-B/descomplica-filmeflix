@@ -15,8 +15,12 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class BaseDomainEntity extends BaseEntity {
+public abstract class BaseDomainEntity extends BaseEntity<Long> {
 
     private String nome;
+
+    public BaseDomainEntity(Long id) {
+        super(id);
+    }
 
 }

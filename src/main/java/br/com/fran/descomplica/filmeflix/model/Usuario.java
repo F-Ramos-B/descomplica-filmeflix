@@ -34,7 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Usuario extends BaseEntity implements UserDetails {
+public class Usuario extends BaseEntity<Long> implements UserDetails {
 
     @Size(max = 100)
     private String nome;

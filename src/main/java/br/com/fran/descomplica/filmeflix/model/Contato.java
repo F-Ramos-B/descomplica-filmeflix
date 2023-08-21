@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Contato extends BaseEntity {
+public class Contato extends BaseEntity<Long> {
 
     @Size(max = 2)
     private String ddd;

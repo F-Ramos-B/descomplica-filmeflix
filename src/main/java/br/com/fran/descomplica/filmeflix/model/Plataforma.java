@@ -25,7 +25,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Plataforma extends BaseEntity {
+public class Plataforma extends BaseEntity<Long> {
 
     @Size(max = 50)
     private String nome;
@@ -46,5 +46,9 @@ public class Plataforma extends BaseEntity {
 
     @OneToMany(mappedBy = "plataforma", fetch = FetchType.LAZY)
     private List<Filme> filmes = new ArrayList<>();
+
+    public Plataforma(Long id) {
+        super(id);
+    }
 
 }

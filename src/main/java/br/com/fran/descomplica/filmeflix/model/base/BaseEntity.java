@@ -20,12 +20,12 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class BaseEntity extends BaseSerializable {
+public abstract class BaseEntity<ID> extends BaseSerializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private ID id;
 
 }

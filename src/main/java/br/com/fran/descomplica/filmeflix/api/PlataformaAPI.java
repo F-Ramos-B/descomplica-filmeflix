@@ -24,7 +24,7 @@ public class PlataformaAPI {
 
     @GetMapping
     public ResponseEntity<List<PlataformaDTO>> listarPlataformas() {
-        return ResponseEntity.ok(plataformaService.listarPlataformas());
+        return ResponseEntity.ok(plataformaService.listar());
     }
 
 }

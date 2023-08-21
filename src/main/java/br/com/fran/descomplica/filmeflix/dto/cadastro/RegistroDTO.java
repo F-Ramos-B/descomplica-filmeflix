@@ -1,5 +1,6 @@
-package br.com.fran.descomplica.filmeflix.dto;
+package br.com.fran.descomplica.filmeflix.dto.cadastro;
 
+import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

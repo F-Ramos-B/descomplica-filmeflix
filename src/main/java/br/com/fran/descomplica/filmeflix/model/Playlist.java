@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Playlist extends BaseEntity {
+public class Playlist extends BaseEntity<Long> {
 
     @Size(max = 20)
     private String nome;

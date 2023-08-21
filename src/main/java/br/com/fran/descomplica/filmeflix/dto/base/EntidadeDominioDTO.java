@@ -1,4 +1,4 @@
-package br.com.fran.descomplica.filmeflix.dto;
+package br.com.fran.descomplica.filmeflix.dto.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

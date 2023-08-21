@@ -1,6 +1,6 @@
 package br.com.fran.descomplica.filmeflix.api;
 
-import br.com.fran.descomplica.filmeflix.dto.EntidadeDominioDTO;
+import br.com.fran.descomplica.filmeflix.dto.base.EntidadeDominioDTO;
 import br.com.fran.descomplica.filmeflix.service.GeneroService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class GeneroAPI {
 
     @GetMapping
     public ResponseEntity<List<EntidadeDominioDTO>> listarGeneros() {
-        return ResponseEntity.ok(generoService.listarGeneros());
+        return ResponseEntity.ok(generoService.listar());
     }
 
 }

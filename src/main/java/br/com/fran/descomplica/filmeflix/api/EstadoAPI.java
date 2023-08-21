@@ -24,7 +24,7 @@ public class EstadoAPI {
 
     @GetMapping
     public ResponseEntity<List<EstadoDTO>> listarEstados() {
-        return ResponseEntity.ok(estadoService.listarEstados());
+        return ResponseEntity.ok(estadoService.listar());
     }
 
 }

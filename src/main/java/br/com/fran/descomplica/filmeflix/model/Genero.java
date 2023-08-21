@@ -27,4 +27,8 @@ public class Genero extends BaseDomainEntity {
     @ManyToMany(mappedBy = "generos")
     private List<Filme> filmes = new ArrayList<>();
 
+    public Genero(Long id) {
+        super(id);
+    }
+
 }

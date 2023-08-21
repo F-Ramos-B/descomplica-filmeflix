@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MensagemDTO<T> {
+public class ResponseDTO<T> {
 
     private String mensagem;
     private T data;
@@ -22,9 +22,10 @@ public class MensagemDTO<T> {
     @Builder.Default
     private LocalDateTime dataHora = LocalDateTime.now();
 
-    public MensagemDTO(String mensagem, T data) {
+    public ResponseDTO(String mensagem, T data) {
         this.mensagem = mensagem;
         this.data = data;
+        this.dataHora = LocalDateTime.now();
     }
 
 }

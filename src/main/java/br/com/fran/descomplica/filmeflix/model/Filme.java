@@ -4,7 +4,6 @@ import br.com.fran.descomplica.filmeflix.model.base.BaseEntity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,7 +28,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Filme extends BaseEntity {
+public class Filme extends BaseEntity<Long> {
 
     @Size(max = 50)
     private String titulo;
@@ -38,8 +36,8 @@ public class Filme extends BaseEntity {
     @Size(max = 500)
     private String descricao;
 
-    @Column(name = "numero_visualizaoes")
-    private Integer numeroVisualizaoes;
+    @Column(name = "numero_visualizacoes")
+    private Integer numeroVisualizacoes = 0;
 
     @Size(max = 255)
     @Column(name = "link_imagem")
@@ -52,20 +50,16 @@ public class Filme extends BaseEntity {
     @Column(name = "classificacao_indicativa")
     private Integer classificacaoIndicativa;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
     @JoinTable(name = "generos_filmes", joinColumns = {
         @JoinColumn(name = "id_filme", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_genero", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Genero> generos = new ArrayList<>();
 
     @JoinTable(name = "filmes_atores", joinColumns = {
@@ -81,7 +75,7 @@ public class Filme extends BaseEntity {
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
     @JoinColumn(name = "id_plataforma", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Plataforma plataforma;
 
 }

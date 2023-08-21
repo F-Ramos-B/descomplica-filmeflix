@@ -1,6 +1,6 @@
 package br.com.fran.descomplica.filmeflix.mapper;
 
-import br.com.fran.descomplica.filmeflix.dto.RegistroDTO;
+import br.com.fran.descomplica.filmeflix.dto.cadastro.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
 import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
 import br.com.fran.descomplica.filmeflix.model.Usuario;

@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Ator extends BaseEntity {
+public class Ator extends BaseEntity<Long> {
 
     @Size(max = 50)
     private String nome;
