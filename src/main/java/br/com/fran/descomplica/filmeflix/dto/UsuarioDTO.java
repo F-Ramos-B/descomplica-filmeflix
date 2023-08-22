@@ -1,6 +1,7 @@
 package br.com.fran.descomplica.filmeflix.dto;
 
 import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
+import br.com.fran.descomplica.filmeflix.util.IIdade;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDTO {
+public class UsuarioDTO implements IIdade {
 
     private Long id;
     private String nome;

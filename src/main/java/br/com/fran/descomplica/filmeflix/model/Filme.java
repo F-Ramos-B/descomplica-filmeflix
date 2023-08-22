@@ -37,7 +37,7 @@ public class Filme extends BaseEntity<Long> {
     private String descricao;
 
     @Column(name = "numero_visualizacoes")
-    private Integer numeroVisualizacoes = 0;
+    private int numeroVisualizacoes;
 
     @Size(max = 255)
     @Column(name = "link_imagem")
@@ -48,7 +48,7 @@ public class Filme extends BaseEntity<Long> {
     private String linkFilme;
 
     @Column(name = "classificacao_indicativa")
-    private Integer classificacaoIndicativa;
+    private int classificacaoIndicativa;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -77,5 +77,9 @@ public class Filme extends BaseEntity<Long> {
     @JoinColumn(name = "id_plataforma", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.MERGE)
     private Plataforma plataforma;
+    
+    public int incrementarVisualizacoes() {
+        return ++numeroVisualizacoes;
+    }
 
 }

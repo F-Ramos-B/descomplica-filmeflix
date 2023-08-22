@@ -2,6 +2,7 @@ package br.com.fran.descomplica.filmeflix.model;
 
 import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import br.com.fran.descomplica.filmeflix.model.base.BaseEntity;
+import br.com.fran.descomplica.filmeflix.util.IIdade;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Usuario extends BaseEntity<Long> implements UserDetails {
+public class Usuario extends BaseEntity<Long> implements UserDetails, IIdade {
 
     @Size(max = 100)
     private String nome;
@@ -110,5 +111,5 @@ public class Usuario extends BaseEntity<Long> implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
+    
 }

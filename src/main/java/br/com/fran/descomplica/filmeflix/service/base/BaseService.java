@@ -18,8 +18,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public abstract class BaseService<E extends BaseEntity<ID>, ID, DTO, MAPPER extends BaseMapper<E, DTO>, R extends JpaRepository<E, ID>> implements ResultUtils {
 
-    private final R repository;
-    private final MAPPER mapper;
+    protected final R repository;
+    protected final MAPPER mapper;
 
     protected BaseService(R repository, MAPPER mapperInstance) {
         this.repository = repository;

@@ -14,9 +14,9 @@ public class BaseFilmeDTO {
     private Long id;
     private String titulo;
     private String descricao;
-    private Integer numeroVisualizaoes;
+    private int numeroVisualizacoes = 0;
     private String linkImagem;
     private String linkFilme;
-    private Integer classificacaoIndicativa;
+    private int classificacaoIndicativa;
 
 }
