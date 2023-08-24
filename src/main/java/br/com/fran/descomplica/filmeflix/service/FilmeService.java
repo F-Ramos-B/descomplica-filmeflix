@@ -34,11 +34,10 @@ public class FilmeService extends BaseService<Filme, Long, FilmeDTO, FilmeMapper
 //        if (usuario.getIdade() < filme.getClassificacaoIndicativa()) {
 //            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Usuário não tem idade suficiente para ver filme");
 //        }
-
         filme.incrementarVisualizacoes();
         filme = repository.save(filme);
 
-        return AssistirFilmeMapper.INSTANCE.toDTO(filme);
+        return AssistirFilmeMapper.INSTANCE.toDTO(filme, usuario.getId());
     }
 
 }

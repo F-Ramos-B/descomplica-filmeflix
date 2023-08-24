@@ -6,7 +6,7 @@ import br.com.fran.descomplica.filmeflix.model.Avaliacao;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = UsuarioMapper.class)
 public interface AvaliacaoMapper extends BaseMapper<Avaliacao, AvaliacaoDTO> {
 
     AvaliacaoMapper INSTANCE = Mappers.getMapper(AvaliacaoMapper.class);

@@ -4,15 +4,13 @@ import br.com.fran.descomplica.filmeflix.dto.AssistirFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.AvaliacaoDTO;
 import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
 import br.com.fran.descomplica.filmeflix.model.Filme;
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.server.ResponseStatusException;
 
 @Mapper(uses = {
     GeneroMapper.class, PlataformaMapper.class, AtorMapper.class, AvaliacaoMapper.class
@@ -20,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO> {
 
     AssistirFilmeMapper INSTANCE = Mappers.getMapper(AssistirFilmeMapper.class);
+
+    public AssistirFilmeDTO toDTO(Filme entity, Long idUsuarioLogado);
 
     @AfterMapping
     default void inserirMediaAvaliacoes(@MappingTarget AssistirFilmeDTO dto) {
@@ -29,19 +29,28 @@ public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO>
             return;
         }
 
-        BigDecimal quantidadeAvaliacoes = new BigDecimal(avaliacoes.size());
-        
-//        avaliacoes.stream()
-//                .mapToInt(avaliacao -> avaliacao.getNota())
-//                .average();
-        
-        BigDecimal mediaAvaliacoes = avaliacoes.stream()
-                .map(avaliacao -> new BigDecimal(avaliacao.getNota()))
-                .reduce(BigDecimal::add)
-                .map(total -> total.divide(quantidadeAvaliacoes))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao calcular media de avaliações"));
+        avaliacoes.stream()
+                .mapToInt(AvaliacaoDTO::getNota)
+                .average()
+                .ifPresent(dto::setMediaAvaliacoes);
 
-        dto.setMediaAvaliacoes(mediaAvaliacoes);
+    }
+
+    @AfterMapping
+    default void inserirAvaliacaoUsuarioLogado(@MappingTarget AssistirFilmeDTO dto, Long idUsuarioLogado) {
+        List<AvaliacaoDTO> avaliacoes = dto.getAvaliacoes();
+
+        if (CollectionUtils.isEmpty(avaliacoes)) {
+            return;
+        }
+
+        avaliacoes.stream()
+                .filter(avaliacao -> Objects.equals(avaliacao.getUsuario().getId(), idUsuarioLogado))
+                .findFirst()
+                .ifPresent(avaliacaoUsuarioLogado -> {
+                    dto.setAvaliacaoUsuarioLogado(avaliacaoUsuarioLogado);
+                    avaliacoes.remove(avaliacaoUsuarioLogado);
+                });
     }
 
 }

@@ -16,6 +16,7 @@ public class AvaliacaoDTO {
     private Long id;
     private int nota;
     private String critica;
+    private UsuarioDTO usuario;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime createdAt;
