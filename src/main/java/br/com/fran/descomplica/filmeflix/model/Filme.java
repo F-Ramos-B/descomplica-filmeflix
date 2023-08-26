@@ -59,7 +59,7 @@ public class Filme extends BaseEntity<Long> {
     @JoinTable(name = "generos_filmes", joinColumns = {
         @JoinColumn(name = "id_filme", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_genero", referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Genero> generos = new ArrayList<>();
 
     @JoinTable(name = "filmes_atores", joinColumns = {

@@ -3,9 +3,12 @@ package br.com.fran.descomplica.filmeflix.api;
 import br.com.fran.descomplica.filmeflix.api.base.BaseAPI;
 import br.com.fran.descomplica.filmeflix.dto.AssistirFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.FilmeDTO;
+import br.com.fran.descomplica.filmeflix.dto.FiltroPesquisarFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResponseDTO;
+import br.com.fran.descomplica.filmeflix.dto.ResultadoPesquisaFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.cadastro.FilmeCadastroDTO;
 import br.com.fran.descomplica.filmeflix.service.FilmeService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,11 @@ public class FilmeAPI extends BaseAPI {
     @GetMapping("/assistir/{id}")
     public ResponseEntity<AssistirFilmeDTO> assistirFilme(@PathVariable("id") Long id) {
         return ResponseEntity.ok(filmeService.assistirFilme(id, getUsuarioLogado()));
+    }
+    
+    @GetMapping("/pesquisar")
+    public ResponseEntity<List<ResultadoPesquisaFilmeDTO>> pesquisarFilme(FiltroPesquisarFilmeDTO pesquisaFilmeDTO) {
+        return ResponseEntity.ok(filmeService.pesquisarFilme(pesquisaFilmeDTO));
     }
 
 }
