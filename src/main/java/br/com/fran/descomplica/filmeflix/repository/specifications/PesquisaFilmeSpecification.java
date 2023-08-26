@@ -45,7 +45,7 @@ public class PesquisaFilmeSpecification implements Specification<Filme> {
         }
 
         if (CollectionUtils.isNotEmpty(pesquisaFilmeDTO.getGeneros())) {
-            CriteriaBuilder.In<Long> inGeneros = cb.in(root.join("generos").as(Long.class));
+            CriteriaBuilder.In inGeneros = cb.in(root.join("generos"));
 
             pesquisaFilmeDTO.getGeneros().forEach(genero -> inGeneros.value(genero));
 
