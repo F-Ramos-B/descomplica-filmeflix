@@ -19,7 +19,7 @@ public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO>
 
     AssistirFilmeMapper INSTANCE = Mappers.getMapper(AssistirFilmeMapper.class);
 
-    public AssistirFilmeDTO toDTO(Filme entity, Long idUsuarioLogado);
+    AssistirFilmeDTO toDTO(Filme entity, Long idUsuarioLogado);
 
     @AfterMapping
     default void inserirMediaAvaliacoes(@MappingTarget AssistirFilmeDTO dto) {

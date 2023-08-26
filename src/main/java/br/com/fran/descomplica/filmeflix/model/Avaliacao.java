@@ -2,6 +2,7 @@ package br.com.fran.descomplica.filmeflix.model;
 
 import br.com.fran.descomplica.filmeflix.model.base.BaseEntity;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,11 +32,11 @@ public class Avaliacao extends BaseEntity<Long> {
     private LocalDateTime updatedAt;
 
     @JoinColumn(name = "id_filme", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Filme filme;
 
     @JoinColumn(name = "id_playlist", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Playlist playlist;
 
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")

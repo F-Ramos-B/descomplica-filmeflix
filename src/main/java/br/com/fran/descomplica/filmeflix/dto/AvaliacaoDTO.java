@@ -14,6 +14,8 @@ import lombok.Setter;
 public class AvaliacaoDTO {
 
     private Long id;
+    private Long idFilme;
+    private Long idPlaylist;
     private int nota;
     private String critica;
     private UsuarioDTO usuario;
