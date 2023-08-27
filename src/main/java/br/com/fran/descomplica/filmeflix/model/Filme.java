@@ -65,7 +65,7 @@ public class Filme extends BaseEntity<Long> {
     @JoinTable(name = "filmes_atores", joinColumns = {
         @JoinColumn(name = "id_filme", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_ator", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Ator> atores = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.filme", fetch = FetchType.LAZY)
@@ -77,7 +77,7 @@ public class Filme extends BaseEntity<Long> {
     @JoinColumn(name = "id_plataforma", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.MERGE)
     private Plataforma plataforma;
-    
+
     public int incrementarVisualizacoes() {
         return ++numeroVisualizacoes;
     }

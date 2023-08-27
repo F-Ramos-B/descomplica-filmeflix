@@ -53,4 +53,8 @@ public class Ator extends BaseEntity<Long> {
     @ManyToMany(mappedBy = "atores", fetch = FetchType.LAZY)
     private List<Filme> filmes = new ArrayList<>();
 
+    public Ator(Long id) {
+        super(id);
+    }
+    
 }

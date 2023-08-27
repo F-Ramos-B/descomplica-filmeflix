@@ -37,7 +37,7 @@ public class PesquisaFilmeSpecification implements Specification<Filme> {
             Integer pesquisaMin = ObjectUtils.defaultIfNull(pesquisaFilmeDTO.getClassificacaoIndicativaMin(), 0);
             Integer pesquisaMax = ObjectUtils.defaultIfNull(pesquisaFilmeDTO.getClassificacaoIndicativaMax(), 100);
 
-            predicates.add(cb.between(root.get("classificacaoIndicativa").as(Integer.class), pesquisaMin, pesquisaMax));
+            predicates.add(cb.between(root.get("classificacaoIndicativa"), pesquisaMin, pesquisaMax));
         }
 
         if (pesquisaFilmeDTO.getPlataforma() != null) {
@@ -45,14 +45,10 @@ public class PesquisaFilmeSpecification implements Specification<Filme> {
         }
 
         if (CollectionUtils.isNotEmpty(pesquisaFilmeDTO.getGeneros())) {
-            CriteriaBuilder.In inGeneros = cb.in(root.join("generos"));
-
-            pesquisaFilmeDTO.getGeneros().forEach(genero -> inGeneros.value(genero));
-
-            predicates.add(inGeneros);
+            predicates.add(root.join("generos").in(pesquisaFilmeDTO.getGeneros()));
         }
 
-        return cb.and(predicates.toArray(new Predicate[0]));
+        return cb.and(predicates.toArray(Predicate[]::new));
     }
 
     private String wrapLike(String value) {

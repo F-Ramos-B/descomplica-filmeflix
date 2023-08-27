@@ -3,6 +3,7 @@ package br.com.fran.descomplica.filmeflix.mapper;
 import br.com.fran.descomplica.filmeflix.dto.base.BaseFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.cadastro.FilmeCadastroDTO;
 import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
+import br.com.fran.descomplica.filmeflix.model.Ator;
 import br.com.fran.descomplica.filmeflix.model.Filme;
 import br.com.fran.descomplica.filmeflix.model.Genero;
 import br.com.fran.descomplica.filmeflix.model.Plataforma;
@@ -20,6 +21,7 @@ public interface FilmeCadastroMapper extends BaseMapper<Filme, BaseFilmeDTO> {
         filme.setPlataforma(new Plataforma(filmeCadastroDTO.getPlataforma()));
 
         filmeCadastroDTO.getGeneros().forEach(idGenero -> filme.getGeneros().add(new Genero(idGenero)));
+        filmeCadastroDTO.getAtores().forEach(idAtor -> filme.getAtores().add(new Ator(idAtor)));
 
         return filme;
     }

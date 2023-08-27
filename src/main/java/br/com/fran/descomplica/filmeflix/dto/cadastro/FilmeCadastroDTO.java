@@ -15,6 +15,7 @@ import lombok.Setter;
 public class FilmeCadastroDTO extends BaseFilmeDTO {
 
     private Set<Long> generos = new HashSet<>();
+    private Set<Long> atores = new HashSet<>();
     private Long plataforma;
 
 }
