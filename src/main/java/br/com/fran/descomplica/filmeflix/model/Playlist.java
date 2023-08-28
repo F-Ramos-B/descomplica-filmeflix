@@ -9,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -28,15 +30,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Playlist extends BaseEntity<Long> {
 
-    @Size(max = 20)
+    @Size(max = 50)
     private String nome;
-
-    private Integer avaliacao;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "data_hora_avaliacao")
-    private LocalDateTime dataHoraAvaliacao;
+    
+    @Size(max = 2048)
+    private String descricao;
 
     @Basic(optional = false)
     @NotNull
@@ -49,9 +47,13 @@ public class Playlist extends BaseEntity<Long> {
     private LocalDateTime updatedAt;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.playlist", fetch = FetchType.LAZY)
-    private List<PlaylistFilme> playlists = new ArrayList<>();
+    private List<PlaylistFilme> filmes = new ArrayList<>();
 
     @OneToMany(mappedBy = "playlist", fetch = FetchType.LAZY)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
+
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Usuario usuario;
 
 }

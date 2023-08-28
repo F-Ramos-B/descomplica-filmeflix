@@ -6,12 +6,13 @@ import br.com.fran.descomplica.filmeflix.model.Avaliacao;
 import br.com.fran.descomplica.filmeflix.model.Filme;
 import java.util.List;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.springframework.util.CollectionUtils;
 
-@Mapper
+@Mapper(collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface ResultadoPesquisaFilmeMapper extends BaseMapper<Filme, ResultadoPesquisaFilmeDTO> {
 
     ResultadoPesquisaFilmeMapper INSTANCE = Mappers.getMapper(ResultadoPesquisaFilmeMapper.class);

@@ -1,150 +1,436 @@
-CREATE TABLE `perfis` (
-  `id` integer PRIMARY KEY,
-  `descricao` varchar(20)
-);
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 28-Ago-2023 às 20:23
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 7.4.27
 
-CREATE TABLE `usuarios` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(100),
-  `apelido` varchar(30),
-  `senha` varchar(100),
-  `email` varchar(50),
-  `genero` varchar(50),
-  `link_avatar` varchar(250),
-  `data_nascimento` date,
-  `id_perfil` integer,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-CREATE TABLE `enderecos` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_usuario` integer,
-  `cep` varchar(8),
-  `logradouro` varchar(50),
-  `complemento` varchar(50),
-  `bairro` varchar(50),
-  `cidade` varchar(50),
-  `id_uf` integer,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+--
+-- Banco de dados: `descomplica_filmeflix`
+--
 
-CREATE TABLE `estados` (
-  `id` integer PRIMARY KEY,
-  `uf` varchar(2),
-  `nome` varchar(50)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE `contatos` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_usuario` integer,
-  `ddd` varchar(2),
-  `numero` varchar(20),
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE `filmes` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `titulo` varchar(50),
-  `descricao` varchar(500),
-  `numero_visualizacoes` integer,
-  `link_imagem` varchar(255),
-  `link_filme` varchar(255),
-  `id_plataforma` integer,
-  `classificacao_indicativa` integer,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE `generos` (
-  `id` integer PRIMARY KEY,
-  `genero` varchar(50)
-);
-
-CREATE TABLE `generos_filmes` (
-  `id_filme` integer,
-  `id_genero` integer,
-  PRIMARY KEY (`id_filme`, `id_genero`)
-);
-
-CREATE TABLE `plataformas` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(50),
-  `link_prefixo` varchar(255),
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+--
+-- Estrutura da tabela `atores`
+--
 
 CREATE TABLE `atores` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(50),
-  `sobrenome` varchar(500),
-  `data_nascimento` date,
-  `biografia` varchar(500),
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `sobrenome` varchar(500) DEFAULT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `biografia` varchar(500) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `filmes_atores` (
-  `id_filme` integer,
-  `id_ator` integer,
-  PRIMARY KEY (`id_filme`, `id_ator`)
-);
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `avaliacoes`
+--
 
 CREATE TABLE `avaliacoes` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `id_usuario` integer,
-  `id_filme` integer,
-  `id_playlist` integer,
-  `nota` integer,
-  `critica` varchar(1000),
-  `data_hora_avaliacao` timestamp,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_filme` int(11) DEFAULT NULL,
+  `id_playlist` int(11) DEFAULT NULL,
+  `nota` int(11) DEFAULT NULL,
+  `critica` varchar(2048) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `contatos`
+--
+
+CREATE TABLE `contatos` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `ddd` varchar(2) DEFAULT NULL,
+  `numero` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `enderecos`
+--
+
+CREATE TABLE `enderecos` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `cep` varchar(8) DEFAULT NULL,
+  `logradouro` varchar(50) DEFAULT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
+  `bairro` varchar(50) DEFAULT NULL,
+  `cidade` varchar(50) DEFAULT NULL,
+  `id_uf` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `estados`
+--
+
+CREATE TABLE `estados` (
+  `id` int(11) NOT NULL,
+  `uf` varchar(2) DEFAULT NULL,
+  `nome` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `filmes`
+--
+
+CREATE TABLE `filmes` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(50) DEFAULT NULL,
+  `descricao` varchar(2048) DEFAULT NULL,
+  `numero_visualizacoes` int(11) DEFAULT 0,
+  `link_imagem` varchar(255) DEFAULT NULL,
+  `link_filme` varchar(255) DEFAULT NULL,
+  `id_plataforma` int(11) DEFAULT NULL,
+  `classificacao_indicativa` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `filmes_atores`
+--
+
+CREATE TABLE `filmes_atores` (
+  `id_filme` int(11) NOT NULL,
+  `id_ator` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `generos`
+--
+
+CREATE TABLE `generos` (
+  `id` int(11) NOT NULL,
+  `genero` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `generos_filmes`
+--
+
+CREATE TABLE `generos_filmes` (
+  `id_filme` int(11) NOT NULL,
+  `id_genero` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `perfis`
+--
+
+CREATE TABLE `perfis` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `plataformas`
+--
+
+CREATE TABLE `plataformas` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `link_prefixo` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `playlists`
+--
 
 CREATE TABLE `playlists` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `nome` varchar(20),
-  `avaliacao` int,
-  `data_hora_avaliacao` timestamp,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP
-);
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `descricao` varchar(2048) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `playlists_filmes`
+--
 
 CREATE TABLE `playlists_filmes` (
-  `id_filme` integer,
-  `id_playlist` integer,
-  `created_at` timestamp DEFAULT (now()),
-  PRIMARY KEY (`id_filme`, `id_playlist`)
-);
+  `id_filme` int(11) NOT NULL,
+  `id_playlist` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `contatos` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+-- --------------------------------------------------------
 
-ALTER TABLE `enderecos` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+--
+-- Estrutura da tabela `usuarios`
+--
 
-ALTER TABLE `filmes_atores` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`);
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `apelido` varchar(30) DEFAULT NULL,
+  `senha` varchar(100) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `genero` varchar(50) DEFAULT NULL,
+  `link_avatar` varchar(250) DEFAULT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `id_perfil` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `filmes_atores` ADD FOREIGN KEY (`id_ator`) REFERENCES `atores` (`id`);
+--
+-- Índices para tabelas despejadas
+--
 
-ALTER TABLE `avaliacoes` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`);
+--
+-- Índices para tabela `atores`
+--
+ALTER TABLE `atores`
+  ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `avaliacoes` ADD FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+--
+-- Índices para tabela `avaliacoes`
+--
+ALTER TABLE `avaliacoes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_filme` (`id_filme`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_playlist` (`id_playlist`);
 
-ALTER TABLE `usuarios` ADD FOREIGN KEY (`id_perfil`) REFERENCES `perfis` (`id`);
+--
+-- Índices para tabela `contatos`
+--
+ALTER TABLE `contatos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
-ALTER TABLE `enderecos` ADD FOREIGN KEY (`id_uf`) REFERENCES `estados` (`id`);
+--
+-- Índices para tabela `enderecos`
+--
+ALTER TABLE `enderecos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_uf` (`id_uf`);
 
-ALTER TABLE `filmes` ADD FOREIGN KEY (`id_plataforma`) REFERENCES `plataformas` (`id`);
+--
+-- Índices para tabela `estados`
+--
+ALTER TABLE `estados`
+  ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `avaliacoes` ADD FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`);
+--
+-- Índices para tabela `filmes`
+--
+ALTER TABLE `filmes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_plataforma` (`id_plataforma`);
 
-ALTER TABLE `playlists_filmes` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`);
+--
+-- Índices para tabela `filmes_atores`
+--
+ALTER TABLE `filmes_atores`
+  ADD PRIMARY KEY (`id_filme`,`id_ator`),
+  ADD KEY `id_ator` (`id_ator`);
 
-ALTER TABLE `playlists_filmes` ADD FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`);
+--
+-- Índices para tabela `generos`
+--
+ALTER TABLE `generos`
+  ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `generos_filmes` ADD FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`);
+--
+-- Índices para tabela `generos_filmes`
+--
+ALTER TABLE `generos_filmes`
+  ADD PRIMARY KEY (`id_filme`,`id_genero`),
+  ADD KEY `id_genero` (`id_genero`);
 
-ALTER TABLE `generos_filmes` ADD FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id`);
+--
+-- Índices para tabela `perfis`
+--
+ALTER TABLE `perfis`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `plataformas`
+--
+ALTER TABLE `plataformas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `playlists`
+--
+ALTER TABLE `playlists`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Índices para tabela `playlists_filmes`
+--
+ALTER TABLE `playlists_filmes`
+  ADD PRIMARY KEY (`id_filme`,`id_playlist`),
+  ADD KEY `id_playlist` (`id_playlist`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_perfil` (`id_perfil`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `atores`
+--
+ALTER TABLE `atores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `avaliacoes`
+--
+ALTER TABLE `avaliacoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `contatos`
+--
+ALTER TABLE `contatos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `enderecos`
+--
+ALTER TABLE `enderecos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `filmes`
+--
+ALTER TABLE `filmes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `plataformas`
+--
+ALTER TABLE `plataformas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `playlists`
+--
+ALTER TABLE `playlists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `avaliacoes`
+--
+ALTER TABLE `avaliacoes`
+  ADD CONSTRAINT `avaliacoes_ibfk_1` FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`),
+  ADD CONSTRAINT `avaliacoes_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `avaliacoes_ibfk_3` FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`);
+
+--
+-- Limitadores para a tabela `contatos`
+--
+ALTER TABLE `contatos`
+  ADD CONSTRAINT `contatos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `enderecos`
+--
+ALTER TABLE `enderecos`
+  ADD CONSTRAINT `enderecos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `enderecos_ibfk_2` FOREIGN KEY (`id_uf`) REFERENCES `estados` (`id`);
+
+--
+-- Limitadores para a tabela `filmes`
+--
+ALTER TABLE `filmes`
+  ADD CONSTRAINT `filmes_ibfk_1` FOREIGN KEY (`id_plataforma`) REFERENCES `plataformas` (`id`);
+
+--
+-- Limitadores para a tabela `filmes_atores`
+--
+ALTER TABLE `filmes_atores`
+  ADD CONSTRAINT `filmes_atores_ibfk_1` FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`),
+  ADD CONSTRAINT `filmes_atores_ibfk_2` FOREIGN KEY (`id_ator`) REFERENCES `atores` (`id`);
+
+--
+-- Limitadores para a tabela `generos_filmes`
+--
+ALTER TABLE `generos_filmes`
+  ADD CONSTRAINT `generos_filmes_ibfk_1` FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`),
+  ADD CONSTRAINT `generos_filmes_ibfk_2` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id`);
+
+--
+-- Limitadores para a tabela `playlists`
+--
+ALTER TABLE `playlists`
+  ADD CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `playlists_filmes`
+--
+ALTER TABLE `playlists_filmes`
+  ADD CONSTRAINT `playlists_filmes_ibfk_1` FOREIGN KEY (`id_filme`) REFERENCES `filmes` (`id`),
+  ADD CONSTRAINT `playlists_filmes_ibfk_2` FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`);
+
+--
+-- Limitadores para a tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfis` (`id`);
+COMMIT;

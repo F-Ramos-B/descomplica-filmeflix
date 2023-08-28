@@ -25,7 +25,7 @@ public class Avaliacao extends BaseEntity<Long> {
 
     private int nota;
 
-    @Size(max = 1000)
+    @Size(max = 2048)
     private String critica;
 
     private LocalDateTime createdAt;

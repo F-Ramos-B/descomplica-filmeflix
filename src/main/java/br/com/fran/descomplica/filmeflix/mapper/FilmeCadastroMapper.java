@@ -7,10 +7,11 @@ import br.com.fran.descomplica.filmeflix.model.Ator;
 import br.com.fran.descomplica.filmeflix.model.Filme;
 import br.com.fran.descomplica.filmeflix.model.Genero;
 import br.com.fran.descomplica.filmeflix.model.Plataforma;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface FilmeCadastroMapper extends BaseMapper<Filme, BaseFilmeDTO> {
 
     FilmeCadastroMapper INSTANCE = Mappers.getMapper(FilmeCadastroMapper.class);

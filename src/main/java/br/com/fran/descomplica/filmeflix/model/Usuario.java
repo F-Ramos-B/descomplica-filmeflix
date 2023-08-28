@@ -76,6 +76,9 @@ public class Usuario extends BaseEntity<Long> implements UserDetails, IIdade {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Playlist> playlists = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

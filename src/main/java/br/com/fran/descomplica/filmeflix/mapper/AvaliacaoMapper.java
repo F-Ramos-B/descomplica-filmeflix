@@ -4,12 +4,13 @@ import br.com.fran.descomplica.filmeflix.dto.AvaliacaoDTO;
 import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
 import br.com.fran.descomplica.filmeflix.model.Avaliacao;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = UsuarioMapper.class)
+@Mapper(uses = UsuarioMapper.class, collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface AvaliacaoMapper extends BaseMapper<Avaliacao, AvaliacaoDTO> {
 
     AvaliacaoMapper INSTANCE = Mappers.getMapper(AvaliacaoMapper.class);

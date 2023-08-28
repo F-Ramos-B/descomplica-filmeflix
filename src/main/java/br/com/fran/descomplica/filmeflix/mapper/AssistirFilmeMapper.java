@@ -7,6 +7,7 @@ import br.com.fran.descomplica.filmeflix.model.Filme;
 import java.util.List;
 import java.util.Objects;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -14,7 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 @Mapper(uses = {
     GeneroMapper.class, PlataformaMapper.class, AtorMapper.class, AvaliacaoMapper.class
-})
+}, collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
 public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO> {
 
     AssistirFilmeMapper INSTANCE = Mappers.getMapper(AssistirFilmeMapper.class);
