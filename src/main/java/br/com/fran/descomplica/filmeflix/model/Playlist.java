@@ -4,7 +4,6 @@ import br.com.fran.descomplica.filmeflix.model.base.BaseEntity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,14 +33,14 @@ public class Playlist extends BaseEntity<Long> {
     
     @Size(max = 2048)
     private String descricao;
+    
+    @Size(max = 255)
+    @Column(name = "link_imagem")
+    private String linkImagem;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 

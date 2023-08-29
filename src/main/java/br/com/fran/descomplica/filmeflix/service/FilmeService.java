@@ -5,6 +5,7 @@ import br.com.fran.descomplica.filmeflix.dto.FilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.FiltroPesquisarFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResponseDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResultadoPesquisaFilmeDTO;
+import br.com.fran.descomplica.filmeflix.dto.base.EntidadeDominioDTO;
 import br.com.fran.descomplica.filmeflix.dto.cadastro.FilmeCadastroDTO;
 import br.com.fran.descomplica.filmeflix.mapper.AssistirFilmeMapper;
 import br.com.fran.descomplica.filmeflix.mapper.FilmeCadastroMapper;
@@ -16,6 +17,7 @@ import br.com.fran.descomplica.filmeflix.repository.FilmeRepository;
 import br.com.fran.descomplica.filmeflix.repository.specifications.PesquisaFilmeSpecification;
 import br.com.fran.descomplica.filmeflix.service.base.BaseService;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +53,10 @@ public class FilmeService extends BaseService<Filme, Long, FilmeDTO, FilmeMapper
         return ResultadoPesquisaFilmeMapper.INSTANCE.toDTOList(filmes);
     }
 
+    public List<EntidadeDominioDTO> listarSelectItem() {
+        return repository.findAll().stream()
+                .map(filme -> new EntidadeDominioDTO(filme.getId(), filme.getTitulo()))
+                .collect(Collectors.toList());
+    }
 
 }

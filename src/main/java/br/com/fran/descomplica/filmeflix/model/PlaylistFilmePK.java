@@ -1,6 +1,7 @@
 package br.com.fran.descomplica.filmeflix.model;
 
 import br.com.fran.descomplica.filmeflix.model.base.BaseSerializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,11 +20,16 @@ import lombok.ToString;
 public class PlaylistFilmePK extends BaseSerializable {
 
     @JoinColumn(name = "id_filme", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private Filme filme;
 
     @JoinColumn(name = "id_playlist", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Playlist playlist;
+
+    public PlaylistFilmePK(Filme filme, Playlist playlist) {
+        this.filme = filme;
+        this.playlist = playlist;
+    }
 
 }

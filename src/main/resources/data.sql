@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Ago-2023 às 20:24
+-- Tempo de geração: 29-Ago-2023 às 04:34
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -70,7 +70,7 @@ INSERT INTO `estados` (`id`, `uf`, `nome`) VALUES
 --
 
 INSERT INTO `filmes` (`id`, `titulo`, `descricao`, `numero_visualizacoes`, `link_imagem`, `link_filme`, `id_plataforma`, `classificacao_indicativa`, `created_at`, `updated_at`) VALUES
-(1, 'Ataque dos ETs de Varginha', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae sem eget mi varius auctor quis ut sapien. Nulla nulla ante, pulvinar quis lacus in, accumsan pretium nisl. Quisque scelerisque quam sed consectetur efficitur. Donec vehicula, tellus eu suscipit scelerisque, dolor diam cursus diam, vel faucibus odio lectus sed quam. Suspendisse efficitur pulvinar arcu, aliquam blandit lacus congue in. Nam non orci elementum, tincidunt ligula et, porta erat. Fusce vel molestie nibh. Nulla rh', 153, 'https://s2-g1.glbimg.com/CJKiIY0mkzEijUth7BiwRaZaj4A=/0x0:1280x960/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/y/P/lBjRbHQsynRPfDpo3MzQ/nave-et-de-varginha.jpeg', 'JHPc9vzE_CI', 1, 14, '2023-08-21 19:18:48', '2023-08-27 00:15:07'),
+(1, 'Ataque dos ETs de Varginha', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae sem eget mi varius auctor quis ut sapien. Nulla nulla ante, pulvinar quis lacus in, accumsan pretium nisl. Quisque scelerisque quam sed consectetur efficitur. Donec vehicula, tellus eu suscipit scelerisque, dolor diam cursus diam, vel faucibus odio lectus sed quam. Suspendisse efficitur pulvinar arcu, aliquam blandit lacus congue in. Nam non orci elementum, tincidunt ligula et, porta erat. Fusce vel molestie nibh. Nulla rh', 154, 'https://s2-g1.glbimg.com/CJKiIY0mkzEijUth7BiwRaZaj4A=/0x0:1280x960/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/y/P/lBjRbHQsynRPfDpo3MzQ/nave-et-de-varginha.jpeg', 'JHPc9vzE_CI', 1, 14, '2023-08-21 19:18:48', '2023-08-27 00:15:07'),
 (2, 'Ataque dos ETs de Varginha', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae sem eget mi varius auctor quis ut sapien. Nulla nulla ante, pulvinar quis lacus in, accumsan pretium nisl. Quisque scelerisque quam sed consectetur efficitur. Donec vehicula, tellus eu suscipit scelerisque, dolor diam cursus diam, vel faucibus odio lectus sed quam. Suspendisse efficitur pulvinar arcu, aliquam blandit lacus congue in. Nam non orci elementum, tincidunt ligula et, porta erat. Fusce vel molestie nibh. Nulla rh', 140, 'https://s2-g1.glbimg.com/CJKiIY0mkzEijUth7BiwRaZaj4A=/0x0:1280x960/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/y/P/lBjRbHQsynRPfDpo3MzQ/nave-et-de-varginha.jpeg', 'JHPc9vzE_CI', 1, 14, '2023-08-21 19:18:48', '2023-08-27 00:15:07'),
 (3, 'Ataque dos ETs de Varginha', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae sem eget mi varius auctor quis ut sapien. Nulla nulla ante, pulvinar quis lacus in, accumsan pretium nisl. Quisque scelerisque quam sed consectetur efficitur. Donec vehicula, tellus eu suscipit scelerisque, dolor diam cursus diam, vel faucibus odio lectus sed quam. Suspendisse efficitur pulvinar arcu, aliquam blandit lacus congue in. Nam non orci elementum, tincidunt ligula et, porta erat. Fusce vel molestie nibh. Nulla rh', 140, 'https://s2-g1.glbimg.com/CJKiIY0mkzEijUth7BiwRaZaj4A=/0x0:1280x960/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/y/P/lBjRbHQsynRPfDpo3MzQ/nave-et-de-varginha.jpeg', 'JHPc9vzE_CI', 1, 14, '2023-08-21 19:18:48', '2023-08-27 00:15:07'),
 (4, 'Ataque dos ETs de Varginha', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae sem eget mi varius auctor quis ut sapien. Nulla nulla ante, pulvinar quis lacus in, accumsan pretium nisl. Quisque scelerisque quam sed consectetur efficitur. Donec vehicula, tellus eu suscipit scelerisque, dolor diam cursus diam, vel faucibus odio lectus sed quam. Suspendisse efficitur pulvinar arcu, aliquam blandit lacus congue in. Nam non orci elementum, tincidunt ligula et, porta erat. Fusce vel molestie nibh. Nulla rh', 139, 'https://s2-g1.glbimg.com/CJKiIY0mkzEijUth7BiwRaZaj4A=/0x0:1280x960/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/y/P/lBjRbHQsynRPfDpo3MzQ/nave-et-de-varginha.jpeg', 'JHPc9vzE_CI', 1, 14, '2023-08-21 19:18:48', '2023-08-27 00:15:07'),
@@ -125,6 +125,25 @@ INSERT INTO `perfis` (`id`, `descricao`) VALUES
 INSERT INTO `plataformas` (`id`, `nome`, `link_prefixo`, `created_at`, `updated_at`) VALUES
 (1, 'Youtube', 'https://www.youtube.com/embed/', '2023-08-21 02:10:41', '2023-08-22 23:06:18'),
 (2, 'Dailymotion', 'https://www.dailymotion.com/embed/video/', '2023-08-21 02:10:41', '2023-08-22 23:06:21');
+
+--
+-- Extraindo dados da tabela `playlists`
+--
+
+INSERT INTO `playlists` (`id`, `id_usuario`, `nome`, `descricao`, `link_imagem`, `created_at`, `updated_at`) VALUES
+(1, 3, 'wafdsafwef', 'asdccsd', '0', '2023-08-29 02:26:18', '2023-08-29 02:26:18'),
+(2, 3, 'fgsdg', 'rgfsdfgerg', '0', '2023-08-29 02:28:26', '2023-08-29 02:28:26'),
+(3, 3, 'trhdfgh', 'rtghdfthg', '0', '2023-08-29 02:30:28', '2023-08-29 02:30:28'),
+(4, 3, 'fhvhfhfghf', 'gfhhgfjgnfngffng', 'tfujytjygfjtfyuj', '2023-08-29 02:33:07', '2023-08-29 02:33:07');
+
+--
+-- Extraindo dados da tabela `playlists_filmes`
+--
+
+INSERT INTO `playlists_filmes` (`id_filme`, `id_playlist`, `created_at`) VALUES
+(1, 4, '2023-08-29 02:33:08'),
+(2, 4, '2023-08-29 02:33:08'),
+(3, 4, '2023-08-29 02:33:08');
 
 --
 -- Extraindo dados da tabela `usuarios`

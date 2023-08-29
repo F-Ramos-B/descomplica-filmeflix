@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Ago-2023 às 20:23
+-- Tempo de geração: 29-Ago-2023 às 04:34
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -182,6 +182,7 @@ CREATE TABLE `playlists` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `descricao` varchar(2048) NOT NULL,
+  `link_imagem` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

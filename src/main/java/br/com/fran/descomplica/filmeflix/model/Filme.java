@@ -68,7 +68,7 @@ public class Filme extends BaseEntity<Long> {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Ator> atores = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlistFilmePK.filme", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "playlistFilmePK.filme", fetch = FetchType.LAZY)
     private List<PlaylistFilme> playlists = new ArrayList<>();
 
     @OneToMany(mappedBy = "filme", fetch = FetchType.LAZY)
@@ -80,6 +80,10 @@ public class Filme extends BaseEntity<Long> {
 
     public int incrementarVisualizacoes() {
         return ++numeroVisualizacoes;
+    }
+
+    public Filme(Long id) {
+        super(id);
     }
 
 }

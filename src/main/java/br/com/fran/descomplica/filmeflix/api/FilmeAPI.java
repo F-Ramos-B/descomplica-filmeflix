@@ -6,6 +6,7 @@ import br.com.fran.descomplica.filmeflix.dto.FilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.FiltroPesquisarFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResponseDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResultadoPesquisaFilmeDTO;
+import br.com.fran.descomplica.filmeflix.dto.base.EntidadeDominioDTO;
 import br.com.fran.descomplica.filmeflix.dto.cadastro.FilmeCadastroDTO;
 import br.com.fran.descomplica.filmeflix.service.FilmeService;
 import java.util.List;
@@ -42,10 +43,15 @@ public class FilmeAPI extends BaseAPI {
     public ResponseEntity<AssistirFilmeDTO> assistirFilme(@PathVariable("id") Long id) {
         return ResponseEntity.ok(filmeService.assistirFilme(id, getUsuarioLogado()));
     }
-    
+
     @GetMapping("/pesquisar")
     public ResponseEntity<List<ResultadoPesquisaFilmeDTO>> pesquisarFilme(FiltroPesquisarFilmeDTO pesquisaFilmeDTO) {
         return ResponseEntity.ok(filmeService.pesquisarFilme(pesquisaFilmeDTO));
+    }
+
+    @GetMapping("/select-itens")
+    public ResponseEntity<List<EntidadeDominioDTO>> listarSelectItem() {
+        return ResponseEntity.ok(filmeService.listarSelectItem());
     }
 
 }
