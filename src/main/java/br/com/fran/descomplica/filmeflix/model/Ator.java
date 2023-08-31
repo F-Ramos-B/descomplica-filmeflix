@@ -5,13 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,13 +38,9 @@ public class Ator extends BaseEntity<Long> {
     @Size(max = 500)
     private String biografia;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 

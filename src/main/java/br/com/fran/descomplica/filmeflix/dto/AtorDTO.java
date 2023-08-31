@@ -18,6 +18,7 @@ import lombok.Setter;
 public class AtorDTO extends EntidadeDominioDTO implements IIdade, INomeCompleto {
 
     private String sobrenome;
+    private String biografia;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;

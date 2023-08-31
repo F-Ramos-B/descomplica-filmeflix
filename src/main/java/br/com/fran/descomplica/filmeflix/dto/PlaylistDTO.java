@@ -18,6 +18,7 @@ public class PlaylistDTO extends BasePlaylistDTO {
 
     private List<PlaylistFilmeDTO> filmes = new ArrayList<>();
     private List<AvaliacaoDTO> avaliacoes = new ArrayList<>();
+    private AvaliacaoDTO avaliacaoUsuarioLogado;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime createdAt;
