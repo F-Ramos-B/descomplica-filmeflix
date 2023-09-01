@@ -29,13 +29,13 @@ public class Ator extends BaseEntity<Long> {
     @Size(max = 50)
     private String nome;
 
-    @Size(max = 500)
+    @Size(max = 50)
     private String sobrenome;
 
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    @Size(max = 500)
+    @Size(max = 2048)
     private String biografia;
 
     @Column(name = "created_at")

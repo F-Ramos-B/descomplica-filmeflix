@@ -2,6 +2,7 @@ package br.com.fran.descomplica.filmeflix.service;
 
 import br.com.fran.descomplica.filmeflix.dto.PlaylistDTO;
 import br.com.fran.descomplica.filmeflix.dto.ResponseDTO;
+import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
 import br.com.fran.descomplica.filmeflix.dto.cadastro.PlaylistCadastroDTO;
 import br.com.fran.descomplica.filmeflix.mapper.PlaylistCadastroMapper;
 import br.com.fran.descomplica.filmeflix.mapper.PlaylistMapper;
@@ -23,6 +24,10 @@ public class PlaylistService extends BaseService<Playlist, Long, PlaylistDTO, Pl
         Playlist playlist = repository.save(PlaylistCadastroMapper.INSTANCE.toEntity(playlistCadastroDTO));
 
         return new ResponseDTO<>("Playlist cadastrada com sucesso.", PlaylistMapper.INSTANCE.toDTO(playlist));
+    }
+
+    public PlaylistDTO buscarPorId(Long id, UsuarioDTO usuarioDTO) {
+        return mapper.toDTO(requireNotEmpty(repository.findById(id)), usuarioDTO.getId());
     }
 
 }

@@ -19,7 +19,7 @@ public class AssistirFilmeDTO extends FilmeDTO {
     private List<AtorDTO> atores = new ArrayList<>();
     private List<AvaliacaoDTO> avaliacoes = new ArrayList<>();
     private AvaliacaoDTO avaliacaoUsuarioLogado;
-    private double mediaAvaliacoes = 0.0;
+    private double mediaAvaliacoes;
 
     @JsonProperty("linkExibicao")
     public String getLinkExibicao() {

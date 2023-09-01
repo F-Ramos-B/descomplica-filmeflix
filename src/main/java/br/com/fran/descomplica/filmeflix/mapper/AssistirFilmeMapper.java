@@ -4,19 +4,17 @@ import br.com.fran.descomplica.filmeflix.dto.AssistirFilmeDTO;
 import br.com.fran.descomplica.filmeflix.dto.AvaliacaoDTO;
 import br.com.fran.descomplica.filmeflix.mapper.base.BaseMapper;
 import br.com.fran.descomplica.filmeflix.model.Filme;
-import java.util.List;
-import java.util.Objects;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-import org.springframework.util.CollectionUtils;
+import br.com.fran.descomplica.filmeflix.mapper.base.ICalcularAvaliacao;
 
 @Mapper(uses = {
     GeneroMapper.class, PlataformaMapper.class, AtorMapper.class, AvaliacaoMapper.class
 }, collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED)
-public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO> {
+public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO>, ICalcularAvaliacao {
 
     AssistirFilmeMapper INSTANCE = Mappers.getMapper(AssistirFilmeMapper.class);
 
@@ -24,34 +22,15 @@ public interface AssistirFilmeMapper extends BaseMapper<Filme, AssistirFilmeDTO>
 
     @AfterMapping
     default void inserirMediaAvaliacoes(@MappingTarget AssistirFilmeDTO dto) {
-        List<AvaliacaoDTO> avaliacoes = dto.getAvaliacoes();
-
-        if (CollectionUtils.isEmpty(avaliacoes)) {
-            return;
-        }
-
-        avaliacoes.stream()
-                .mapToInt(AvaliacaoDTO::getNota)
-                .average()
-                .ifPresent(dto::setMediaAvaliacoes);
-
+        dto.setMediaAvaliacoes(this.calcularMediaAvaliacoes(dto.getAvaliacoes()));
     }
 
     @AfterMapping
     default void inserirAvaliacaoUsuarioLogado(@MappingTarget AssistirFilmeDTO dto, Long idUsuarioLogado) {
-        List<AvaliacaoDTO> avaliacoes = dto.getAvaliacoes();
+        AvaliacaoDTO avaliacaoUsuarioLogado = this.recuperarAvaliacaoUsuarioLogado(dto.getAvaliacoes(), idUsuarioLogado);
 
-        if (CollectionUtils.isEmpty(avaliacoes)) {
-            return;
-        }
-
-        avaliacoes.stream()
-                .filter(avaliacao -> Objects.equals(avaliacao.getUsuario().getId(), idUsuarioLogado))
-                .findFirst()
-                .ifPresent(avaliacaoUsuarioLogado -> {
-                    dto.setAvaliacaoUsuarioLogado(avaliacaoUsuarioLogado);
-                    avaliacoes.remove(avaliacaoUsuarioLogado);
-                });
+        dto.setAvaliacaoUsuarioLogado(avaliacaoUsuarioLogado);
+        dto.getAvaliacoes().remove(avaliacaoUsuarioLogado);
     }
 
 }

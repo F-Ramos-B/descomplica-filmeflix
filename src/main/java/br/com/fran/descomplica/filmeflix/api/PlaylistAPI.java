@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,11 @@ public class PlaylistAPI extends BaseCrudAPI<Long, PlaylistDTO, PlaylistService>
     public ResponseEntity<ResponseDTO<PlaylistDTO>> incluir(@RequestBody @Valid PlaylistCadastroDTO playlistCadastroDTO) {
         playlistCadastroDTO.setUsuario(this.getUsuarioLogadoDTO());
         return ResponseEntity.status(HttpStatus.CREATED).body(service.incluir(playlistCadastroDTO));
+    }
+
+    @Override
+    public ResponseEntity<PlaylistDTO> listarPorId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.buscarPorId(id, this.getUsuarioLogadoDTO()));
     }
 
 }
