@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Ago-2023 às 04:34
+-- Tempo de geração: 18-Set-2023 às 04:40
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.4.27
 
@@ -14,6 +14,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `descomplica_filmeflix`
 --
+CREATE DATABASE IF NOT EXISTS `descomplica_filmeflix` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `descomplica_filmeflix`;
 
 -- --------------------------------------------------------
 
@@ -21,12 +23,13 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `atores`
 --
 
+DROP TABLE IF EXISTS `atores`;
 CREATE TABLE `atores` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
-  `sobrenome` varchar(500) DEFAULT NULL,
+  `sobrenome` varchar(50) DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `biografia` varchar(500) DEFAULT NULL,
+  `biografia` varchar(2048) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -37,6 +40,7 @@ CREATE TABLE `atores` (
 -- Estrutura da tabela `avaliacoes`
 --
 
+DROP TABLE IF EXISTS `avaliacoes`;
 CREATE TABLE `avaliacoes` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -54,6 +58,7 @@ CREATE TABLE `avaliacoes` (
 -- Estrutura da tabela `contatos`
 --
 
+DROP TABLE IF EXISTS `contatos`;
 CREATE TABLE `contatos` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -69,6 +74,7 @@ CREATE TABLE `contatos` (
 -- Estrutura da tabela `enderecos`
 --
 
+DROP TABLE IF EXISTS `enderecos`;
 CREATE TABLE `enderecos` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -88,6 +94,7 @@ CREATE TABLE `enderecos` (
 -- Estrutura da tabela `estados`
 --
 
+DROP TABLE IF EXISTS `estados`;
 CREATE TABLE `estados` (
   `id` int(11) NOT NULL,
   `uf` varchar(2) DEFAULT NULL,
@@ -100,9 +107,11 @@ CREATE TABLE `estados` (
 -- Estrutura da tabela `filmes`
 --
 
+DROP TABLE IF EXISTS `filmes`;
 CREATE TABLE `filmes` (
   `id` int(11) NOT NULL,
   `titulo` varchar(50) DEFAULT NULL,
+  `ano_publicacao` int(4) UNSIGNED DEFAULT NULL,
   `descricao` varchar(2048) DEFAULT NULL,
   `numero_visualizacoes` int(11) DEFAULT 0,
   `link_imagem` varchar(255) DEFAULT NULL,
@@ -119,6 +128,7 @@ CREATE TABLE `filmes` (
 -- Estrutura da tabela `filmes_atores`
 --
 
+DROP TABLE IF EXISTS `filmes_atores`;
 CREATE TABLE `filmes_atores` (
   `id_filme` int(11) NOT NULL,
   `id_ator` int(11) NOT NULL
@@ -130,6 +140,7 @@ CREATE TABLE `filmes_atores` (
 -- Estrutura da tabela `generos`
 --
 
+DROP TABLE IF EXISTS `generos`;
 CREATE TABLE `generos` (
   `id` int(11) NOT NULL,
   `genero` varchar(50) DEFAULT NULL
@@ -141,6 +152,7 @@ CREATE TABLE `generos` (
 -- Estrutura da tabela `generos_filmes`
 --
 
+DROP TABLE IF EXISTS `generos_filmes`;
 CREATE TABLE `generos_filmes` (
   `id_filme` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL
@@ -152,6 +164,7 @@ CREATE TABLE `generos_filmes` (
 -- Estrutura da tabela `perfis`
 --
 
+DROP TABLE IF EXISTS `perfis`;
 CREATE TABLE `perfis` (
   `id` int(11) NOT NULL,
   `descricao` varchar(20) DEFAULT NULL
@@ -163,6 +176,7 @@ CREATE TABLE `perfis` (
 -- Estrutura da tabela `plataformas`
 --
 
+DROP TABLE IF EXISTS `plataformas`;
 CREATE TABLE `plataformas` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
@@ -177,6 +191,7 @@ CREATE TABLE `plataformas` (
 -- Estrutura da tabela `playlists`
 --
 
+DROP TABLE IF EXISTS `playlists`;
 CREATE TABLE `playlists` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -193,6 +208,7 @@ CREATE TABLE `playlists` (
 -- Estrutura da tabela `playlists_filmes`
 --
 
+DROP TABLE IF EXISTS `playlists_filmes`;
 CREATE TABLE `playlists_filmes` (
   `id_filme` int(11) NOT NULL,
   `id_playlist` int(11) NOT NULL,
@@ -205,6 +221,7 @@ CREATE TABLE `playlists_filmes` (
 -- Estrutura da tabela `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,

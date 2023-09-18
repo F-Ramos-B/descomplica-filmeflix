@@ -35,6 +35,9 @@ public class Filme extends BaseEntity<Long> {
 
     @Size(max = 2048)
     private String descricao;
+    
+    @Column(name = "ano_publicacao")
+    private int anoPublicacao;
 
     @Column(name = "numero_visualizacoes")
     private int numeroVisualizacoes;
