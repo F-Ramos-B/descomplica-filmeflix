@@ -5,7 +5,7 @@ import br.com.fran.descomplica.filmeflix.mapper.UsuarioMapper;
 import br.com.fran.descomplica.filmeflix.model.Usuario;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public abstract class BaseAPI {
+public abstract class BaseAPI implements SecuredRestController {
 
     public String getEmailUsuarioLogado() {
         return SecurityContextHolder.getContext().getAuthentication().getName();

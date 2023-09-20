@@ -1,8 +1,9 @@
 package br.com.fran.descomplica.filmeflix.api;
 
+import br.com.fran.descomplica.filmeflix.api.base.BaseAPI;
 import br.com.fran.descomplica.filmeflix.dto.ResponseDTO;
-import br.com.fran.descomplica.filmeflix.dto.cadastro.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.dto.UsuarioDTO;
+import br.com.fran.descomplica.filmeflix.dto.cadastro.RegistroDTO;
 import br.com.fran.descomplica.filmeflix.enums.EnumPerfil;
 import br.com.fran.descomplica.filmeflix.service.UsuarioService;
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/admins")
-public class AdminAPI {
+public class AdminAPI extends BaseAPI {
 
     private final UsuarioService usuarioService;
 
