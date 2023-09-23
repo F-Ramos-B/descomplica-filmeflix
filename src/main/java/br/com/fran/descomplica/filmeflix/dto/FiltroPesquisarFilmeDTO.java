@@ -15,6 +15,8 @@ public class FiltroPesquisarFilmeDTO {
 
     private String titulo;
     private String descricao;
+    private Integer anoPublicacaoMin;
+    private Integer anoPublicacaoMax;
     private Integer classificacaoIndicativaMin;
     private Integer classificacaoIndicativaMax;
     private Set<Long> generos = new HashSet<>();

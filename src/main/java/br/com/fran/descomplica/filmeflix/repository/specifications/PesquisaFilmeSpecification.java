@@ -2,6 +2,7 @@ package br.com.fran.descomplica.filmeflix.repository.specifications;
 
 import br.com.fran.descomplica.filmeflix.dto.FiltroPesquisarFilmeDTO;
 import br.com.fran.descomplica.filmeflix.model.Filme;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -38,6 +39,13 @@ public class PesquisaFilmeSpecification implements Specification<Filme> {
             Integer pesquisaMax = ObjectUtils.defaultIfNull(pesquisaFilmeDTO.getClassificacaoIndicativaMax(), 100);
 
             predicates.add(cb.between(root.get("classificacaoIndicativa"), pesquisaMin, pesquisaMax));
+        }
+        
+        if (ObjectUtils.anyNotNull(pesquisaFilmeDTO.getAnoPublicacaoMin(), pesquisaFilmeDTO.getAnoPublicacaoMax())) {
+            Integer pesquisaMin = ObjectUtils.defaultIfNull(pesquisaFilmeDTO.getAnoPublicacaoMin(), 1900);
+            Integer pesquisaMax = ObjectUtils.defaultIfNull(pesquisaFilmeDTO.getAnoPublicacaoMax(), LocalDate.now().getYear());
+
+            predicates.add(cb.between(root.get("anoPublicacao"), pesquisaMin, pesquisaMax));
         }
 
         if (pesquisaFilmeDTO.getPlataforma() != null) {
